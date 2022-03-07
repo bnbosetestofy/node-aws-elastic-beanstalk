@@ -1,0 +1,76 @@
+<%- include('_layouts/adminheader.ejs') %>
+
+
+        <div id="layoutSidenav">
+           <%- include('_layouts/adminleftpanel.ejs') %>
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4"><%= title %></h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ol>
+                 
+                       
+                        
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>Categories List
+                                <a href="/admin/categories/add-category" class="btn btn-primary pull-right">Add Category</a>
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr class="home">
+                                            <th>Title</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Edit</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+
+                                                                                      
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2021</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+        <script>
+            $( "tbody" ).sortable({
+                items: "tr:not('.home')",
+                placeholder: "ui-state-highlight",
+                update:function(){
+                    var ids = $( "tbody" ).sortable("serialize");
+                    var url = "/admin/categories/reorder-category";
+                    $.post(url,ids);
+                }
+
+            });
+        </script>
+
+<%- include('_layouts/adminfooter.ejs') %>        
+
